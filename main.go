@@ -26,8 +26,6 @@ import (
 func main() {
 	log.Printf("Server started")
 
-	router := sw.NewRouter()
-    router.UseRawPath = true
-	router.UnescapePathValues = false
+	router := sw.NewRouter().UseEncodedPath()
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
