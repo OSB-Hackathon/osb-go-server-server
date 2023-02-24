@@ -27,7 +27,9 @@ type Route struct {
 type Routes []Route
 
 func NewRouter() *mux.Router {
-	router := mux.NewRouter().StrictSlash(true)
+	router := mux.NewRouter().StrictSlash(true).UseEncodedPath()
+	router.UseRawPath = true
+	router.UnescapePathValues = false
 	for _, route := range routes {
 		var handler http.Handler
 		handler = route.HandlerFunc
@@ -114,7 +116,7 @@ var routes = Routes{
 	Route{
 		"ServiceInstanceProvisionUsingPUT",
 		strings.ToUpper("Put"),
-		"/v2/service_instances/{instance_id:.+}",
+		"/v2/service_instances/{instance_id}",
 		ServiceInstanceProvisionUsingPUT,
 	},
 
