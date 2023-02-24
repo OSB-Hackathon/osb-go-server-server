@@ -28,8 +28,6 @@ type Routes []Route
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true).UseEncodedPath()
-	router.UseRawPath = true
-	router.UnescapePathValues = false
 	for _, route := range routes {
 		var handler http.Handler
 		handler = route.HandlerFunc
